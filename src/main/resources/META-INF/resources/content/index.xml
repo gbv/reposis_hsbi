@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+
+  <section title="Publikationsserver der HSBI" xml:lang="de">
+    <div class="jumbotwo" />
+
+    <h1>Publikationsserver der HSBI</h1>
+
+    <p>
+      Der Publikationsserver der Hochschule Bielefeld macht als institutionelles Repositorium der Hochschule die
+      wissenschaftlichen Veröffentlichungen ihrer Angehörigen sichtbar. Er wird von der Hochschulbibliothek in
+      Kooperation mit der Datenverarbeitungszentrale angheboten und stellt einen wichtigen Baustein der Unterstützung 
+      von Open Access dar, des freien Zugangs zu wissenschaftlicher Information. Die Hochschule Bielefeld beschloss 
+      2018 eine <a href="https://www.hsbi.de/open-access/policy">Open-Access-Policy </a> 
+      und empfiehlt allen Autor*innen der Hochschule, eine Kopie ihrer Publikationen auf dem 
+      Publikationsserver der Hochschule Bielefeld bereitzustellen, sofern das Urheberrecht und die jeweiligen Verlagsverträge
+      dies gestatten. Die Publikationen werden über das Forschungsinformationssystem der HSBI erfasst und auf den 
+      Publikationsserver übertragen.
+    </p>
+    <p>   
+      Bei Fragen zum Thema Open Access oder zum Publikationsserver nehmen Sie mit dem 
+      <a href="https://www.hsbi.de/open-access/open-access-serviceteam">Open-Access-Serviceteam </a> 
+      unter <span class="madress">open [at] hsbi.de</span> Kontakt auf.
+      
+    </p>
+
+    
+  </section>
+  <meta>
+    <log date="2025-04-29" time="13:03" labelPath=" » Start" lastEditor="administrator" />
+  </meta>
+</MyCoReWebPage>
