@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
+
+  <!-- ========== extend editor-genres.xed ========== -->
+  <xed:modify ref="admin.fields">
+    <xed:include ref="oa.extension.characteristics" before="related.item.search.of.all.items"/>
+  </xed:modify>
+
+  <xed:template id="oa.extension.characteristics">
+    <div class="form-group row {$xed-validation-marker}">
+      <label class="col-md-3 col-form-label text-right">
+        <xed:output i18n="component.mods.metaData.dictionary.refereed" />
+      </label>
+      <div class="col-md-6">
+        <xed:bind xpath="mods:extension[@type='characteristics']/chars/@refereed">
+          <select class="form-control" style="font-weight:bold;">
+            <option value="">
+              <xed:output i18n="mir.select.optional" />
+            </option>
+            <option value="yes">
+              <xed:output i18n="mir.characteristics.yes" />
+            </option>
+            <option value="no">
+              <xed:output i18n="mir.characteristics.no" />
+            </option>
+          </select>
+        </xed:bind>
+      </div>
+      <mir:help-pmud help-text="{i18n:mir.help.extension.characteristics}" />
+    </div>
+  </xed:template>
+  
+</xed:template>
+
+
