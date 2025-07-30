@@ -27,7 +27,7 @@
         <version>2023.06-SNAPSHOT</version>
     </parent>
 
-  <groupId>de.gbv.hsbi</groupId>
+  <groupId>de.gbv.reposis</groupId>
   <artifactId>reposis_hsbi</artifactId>
   <version>2023.06-SNAPSHOT</version>
 
