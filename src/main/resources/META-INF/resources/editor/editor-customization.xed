@@ -6,6 +6,10 @@
   <xed:modify ref="admin.fields">
     <xed:include ref="oa.extension.characteristics" before="related.item.search.of.all.items"/>
   </xed:modify>
+  
+  <xed:modify ref="cleanup-rules">
+    <xed:include  ref="hsbi.cleanup-rules"/>
+  </xed:modify>
 
   <xed:template id="oa.extension.characteristics">
     <div class="form-group row {$xed-validation-marker}">
@@ -29,6 +33,10 @@
       </div>
       <mir:help-pmud help-text="{i18n:mir.help.extension.characteristics}" />
     </div>
+  </xed:template>
+  
+  <xed:template id="hsbi.cleanup-rules">
+    <xed:cleanup-rule xpath="//mods:extension[@type='characteristics']" relevant-if="(string-length(chars/@refereed) &gt; 0)" />
   </xed:template>
   
 </xed:template>
