@@ -1,0 +1,14 @@
+{
+	"folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../container/hsbi"
+    },
+    {
+      "path": "../reposis_hsbi-a"
+    }
+  ],
+  "settings": {}
+}

@@ -177,5 +177,7 @@ $RECYCLE.BIN/
 .nfs*
 
 # MyCoRe/MIR
-mycore-jpa-defaults.xml 
+mycore-jpa-defaults.xml
 
+# visual studio code
+.code-workspace
