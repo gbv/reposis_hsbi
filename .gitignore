@@ -180,4 +180,4 @@ $RECYCLE.BIN/
 mycore-jpa-defaults.xml
 
 # visual studio code
-.code-workspace
+*.code-workspace
