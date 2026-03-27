@@ -2,3 +2,29 @@
  * - add the needed fonts here
  */
 
+@font-face {
+  font-family: 'Lausanne';
+  font-style: normal;
+  font-weight: 300;
+  src: local(''),
+    url('../../../../fonts/lausanne/HSBILausanne-300.woff2') format('woff2'),
+    url('../../../../fonts/lausanne/HSBILausanne-300.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lausanne';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+    url('../../../../fonts/lausanne/HSBILausanne-400.woff2') format('woff2'),
+    url('../../../../fonts/lausanne/HSBILausanne-400.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lausanne';
+  font-style: normal;
+  font-weight: 700;
+  src: local(''),
+    url('../../../../fonts/lausanne/HSBILausanne-700.woff2') format('woff2'),
+    url('../../../../fonts/lausanne/HSBILausanne-700.woff') format('woff');
+}

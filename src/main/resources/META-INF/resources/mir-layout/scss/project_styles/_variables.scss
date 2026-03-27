@@ -14,8 +14,37 @@
 //  project settings
 // --------------------------------------------------
 
-
+$hsbi-white:      #f7f6f3;
+$hsbi-brown:      #d7d2c3;
+$hsbi-black:      #5c4d3d;
+$hsbi-gold:       #856b47;
+$hsbi-gold-hover: #5c4d3d;
 
 // --------------------------------------------------
 //  overwrite bootstrap
 // --------------------------------------------------
+
+$primary:   $hsbi-brown;
+$secondary: $hsbi-white;
+
+$body-color: black;
+
+$link-color:              black;
+$link-hover-color:        $hsbi-gold;
+$link-decoration:         undeliner;
+$link-hover-decoration:   none;
+
+$font-size-base:          1rem;
+$font-family-sans-serif:  Lausanne, Arial, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+$navbar-padding-x:                  0rem;
+$navbar-nav-link-padding-x:         1rem;
+$navbar-light-active-color:         $hsbi-gold;
+
+$dropdown-color:                    $body-color;
+$dropdown-bg:                       white;
+$dropdown-link-color:               $body-color;
+$dropdown-link-hover-color:         $body-color;
+$dropdown-link-hover-bg:            $primary;
+$dropdown-link-active-color:        $hsbi-gold;
+$dropdown-link-active-bg:           white;

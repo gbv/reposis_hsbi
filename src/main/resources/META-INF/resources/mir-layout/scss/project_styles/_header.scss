@@ -8,7 +8,38 @@
 // XX-Large devices (larger desktops)
 // No media query since the xxl breakpoint has no upper bound on its width
 
+  #header_box {
+    margin: 0 auto 20px auto;
+  }
 
+  #project_logo_box {
+    margin-top: 20px;
+  }
+
+  .project-box {
+    position: relative;
+    &__logo {
+    }
+    &__name {
+      position: absolute;
+      top: 15px;
+      left: 40px;
+      color: black;
+      font-size: 24px;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+  }
+
+  .navbar-expand-sm {
+    justify-content: flex-end;
+  }
+
+  .mir-main-nav {
+    nav.navbar {
+      border-bottom: 1px solid black;
+    }
+  }
 
 // X-Large devices (large desktops, less than 1400px)
 @include media-breakpoint-down(xxl) {
