@@ -4,6 +4,8 @@
 
   <!-- ========== extend editor-genres.xed ========== -->
   <xed:modify ref="admin.fields">
+    <xed:include ref="digibib.ddc.repeat"                after="sdnb.repeat" />
+    <xed:remove  ref="sdnb.repeat" />
     <xed:include ref="oa.extension.characteristics" before="related.item.search.of.all.items"/>
   </xed:modify>
   
@@ -33,6 +35,30 @@
       </div>
       <mir:help-pmud help-text="{i18n:mir.help.extension.characteristics}" />
     </div>
+  </xed:template>
+  
+  <xed:template id="digibib.ddc.repeat">
+    <xed:repeat xpath="mods:classification[@authority='ddc'][@displayLabel='ddc']" min="1" max="10" method="build">
+      <div class="form-group row required {$xed-validation-marker}">
+        <label class="col-md-3 col-form-label text-right">
+          <xed:output i18n="editor.search.digibib.ddc" />
+          :
+        </label>
+        <div class="col-md-6">
+          <div class="controls">
+            <select class="form-control form-control-inline">
+              <option value="">
+                <xed:output i18n="mir.select" />
+              </option>
+              <xed:include uri="xslStyle:items2options:classification:editor:-1:children:DDC" />
+            </select>
+          </div>
+        </div>
+        <mir:help-pmud help-text="{i18n:digibib.help.ddc}" pmud="true" />
+      </div>
+    </xed:repeat>
+    <xed:validate xpath="//mods:mods/mods:classification[@authority='ddc'][@displayLabel='ddc']" required="true" i18n="digibib.validation.ddc"
+      display="global" />
   </xed:template>
   
   <xed:template id="hsbi.cleanup-rules">
