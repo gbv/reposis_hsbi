@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "add-field": {
+        "name":"mods.refereed",
+        "type":"string",
+        "multiValued":false}
+  },
+  {
+    "add-field": {
+        "name":"mods.refereed.public",
+        "type":"string",
+        "multiValued":false}
+  }
+]
