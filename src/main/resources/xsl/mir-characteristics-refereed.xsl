@@ -19,20 +19,20 @@
   <xsl:template name="getCharacteristicsRefereed">
     <xsl:param name="mods"/>
     <xsl:choose>
-      <xsl:when test="$mods/mods:extension[@displayLabel='characteristics']/chars/@refereed='yes'">yes</xsl:when>
-      <xsl:when test="$mods/mods:extension[@displayLabel='characteristics']/chars/@refereed='no'">no</xsl:when>
+      <xsl:when test="$mods/mods:extension[@type='characteristics']/chars/@refereed='yes'">yes</xsl:when>
+      <xsl:when test="$mods/mods:extension[@type='characteristics']/chars/@refereed='no'">no</xsl:when>
       <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:extension[@displayLabel='characteristics']/chars/@refereed='yes'">yes</xsl:when>
-          <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:extension[@displayLabel='characteristics']/chars/@refereed='no'">no</xsl:when>
+          <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='yes'">yes</xsl:when>
+          <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='no'">no</xsl:when>
           <xsl:otherwise>
             <xsl:choose>
-              <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@displayLabel='characteristics']/chars/@refereed='yes'">yes</xsl:when>
-              <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@displayLabel='characteristics']/chars/@refereed='no'">no</xsl:when>
+              <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='yes'">yes</xsl:when>
+              <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='no'">no</xsl:when>
               <xsl:otherwise>
                 <xsl:choose>
-                  <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@displayLabel='characteristics']/chars/@refereed='yes'">yes</xsl:when>
-                  <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@displayLabel='characteristics']/chars/@refereed='no'">no</xsl:when>
+                  <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='yes'">yes</xsl:when>
+                  <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='no'">no</xsl:when>
                   <xsl:otherwise>n/a</xsl:otherwise>
                 </xsl:choose>
               </xsl:otherwise>
