@@ -6,13 +6,14 @@
   <xed:modify ref="admin.fields">
     <xed:include ref="digibib.ddc.repeat"                after="sdnb.repeat" />
     <xed:remove  ref="sdnb.repeat" />
-    <xed:include ref="oa.extension.characteristics" before="related.item.search.of.all.items"/>
+    <xed:include ref="oa.extension.characteristics"      before="related.item.search.of.all.items"/>
   </xed:modify>
   
   <xed:modify ref="cleanup-rules">
     <xed:include  ref="hsbi.cleanup-rules"/>
   </xed:modify>
 
+  <!-- copy from OpenAgrar -->
   <xed:template id="oa.extension.characteristics">
     <div class="form-group row {$xed-validation-marker}">
       <label class="col-md-3 col-form-label text-right">
