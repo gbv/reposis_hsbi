@@ -6,35 +6,64 @@
                 xmlns:xalan="http://xml.apache.org/xalan"
                 xmlns:fn="http://www.w3.org/2005/xpath-functions"
                 xmlns:str="http://exslt.org/strings"
-                exclude-result-prefixes="i18n mcrxsl encoder xalan fn str">
+                xmlns:exslt="http://exslt.org/common"
+                exclude-result-prefixes="i18n mcrxsl encoder xalan fn str exslt">
 
   <xsl:param name="CurrentLang"/>
   <xsl:param name="RequestURL"/>
   <xsl:param name="CurrentUser"/>
 
+  <!--
+    Laedt zusaetzliche Facetten-Stylesheets, die per Property angemeldet sind:
+      MCR.URIResolver.xslIncludes.facets=meine-facette.xsl,noch-eine.xsl
+    Ist die Property nicht gesetzt, liefert der Resolver ein leeres Stylesheet.
+  -->
+  <xsl:include href="xslInclude:facets"/>
+
   <xsl:variable name="facetProperties" select="document(concat('property:','MIR.Response.Facet.*'))"/>
 
+  <!--
+    Sichtbarkeit einer Facette. Ausgewertet werden:
+      .Enabled  'false' schaltet die Facette ab (default: an)
+      .Roles    kommaseparierte Positivliste von Rollen (leer = alle)
+      .User     kommaseparierte Positivliste von Benutzernamen (leer = alle)
+    Die drei Bedingungen werden UND-verknuepft. Rueckgabe: 'true' | 'false'.
+  -->
+  <xsl:template name="isFacetVisible">
+    <xsl:param name="facet_name"/>
+
+    <xsl:variable name="enabledProperty">
+      <xsl:value-of select="$facetProperties/properties/entry[@key=concat('MIR.Response.Facet.', $facet_name, '.Enabled')]"/>
+    </xsl:variable>
+    <xsl:variable name="isEnabled" select="$enabledProperty!='false'"/>
+
+    <xsl:variable name="rolesProperty">
+      <xsl:value-of select="$facetProperties/properties/entry[@key=concat('MIR.Response.Facet.', $facet_name, '.Roles')]"/>
+    </xsl:variable>
+    <xsl:variable name="hasRole" select="string-length($rolesProperty)=0 or count(str:tokenize($rolesProperty,',')[mcrxsl:isCurrentUserInRole(.)])!=0"/>
+
+    <xsl:variable name="userProperty">
+      <xsl:value-of select="$facetProperties/properties/entry[@key=concat('MIR.Response.Facet.', $facet_name, '.User')]"/>
+    </xsl:variable>
+    <xsl:variable name="hasUser" select="string-length($userProperty)=0 or count(str:tokenize($userProperty,',')[.=$CurrentUser])!=0"/>
+
+    <xsl:value-of select="$isEnabled and $hasRole and $hasUser"/>
+  </xsl:template>
+
   <xsl:template name="facets">
+    <!-- festhalten, da im Custom-Loop der Kontext ein temporaerer Baum ist -->
+    <xsl:variable name="response" select="/response"/>
+
     <xsl:for-each select="/response/lst[@name='facet_counts']/lst[@name='facet_fields']/*">
       <xsl:variable name="facet_name" select="self::node()/@name"/>
 
-      <xsl:variable name="enabledProperty">
-        <xsl:value-of select="$facetProperties/properties/entry[@key=concat('MIR.Response.Facet.', $facet_name, '.Enabled')]"/>
+      <xsl:variable name="visible">
+        <xsl:call-template name="isFacetVisible">
+          <xsl:with-param name="facet_name" select="$facet_name"/>
+        </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="isEnabled" select="$enabledProperty!='false'"/>
 
-      <xsl:variable name="rolesProperty">
-        <xsl:value-of select="$facetProperties/properties/entry[@key=concat('MIR.Response.Facet.', $facet_name, '.Roles')]"/>
-      </xsl:variable>
-      <xsl:variable name="hasRole" select="string-length($rolesProperty)=0 or count(str:tokenize($rolesProperty,',')[mcrxsl:isCurrentUserInRole(.)])!=0"/>
-
-      <!-- optionale Einschraenkung auf bestimmte Benutzernamen (kommasepariert), z.B. 'guest' -->
-      <xsl:variable name="userProperty">
-        <xsl:value-of select="$facetProperties/properties/entry[@key=concat('MIR.Response.Facet.', $facet_name, '.User')]"/>
-      </xsl:variable>
-      <xsl:variable name="hasUser" select="string-length($userProperty)=0 or count(str:tokenize($userProperty,',')[.=$CurrentUser])!=0"/>
-
-      <xsl:if test="$isEnabled and $hasRole and $hasUser and self::node()[@name=$facet_name]/int">
+      <xsl:if test="$visible='true' and self::node()[@name=$facet_name]/int">
 
         <xsl:variable name="classIdProperty">
           <xsl:value-of select="$facetProperties/properties/entry[@key=concat('MIR.Response.Facet.', $facet_name, '.ClassId')]"/>
@@ -123,7 +152,41 @@
         </div>
       </xsl:if>
     </xsl:for-each>
+
+    <!--
+      Benutzerdefinierte Facetten. Welche gerendert werden und in welcher
+      Reihenfolge, steuert:
+        MIR.Response.Facet.Custom=mods.dateIssuedOnline,weitere.facette
+      Das Rendern uebernimmt ein per xslInclude:facets geladenes Stylesheet mit
+        <xsl:template match="facet[@name='mods.dateIssuedOnline']" mode="custom-facet">
+      .Enabled / .Roles / .User gelten hier genauso wie bei Solr-Facetten.
+    -->
+    <xsl:variable name="customProperty">
+      <xsl:value-of select="$facetProperties/properties/entry[@key='MIR.Response.Facet.Custom']"/>
+    </xsl:variable>
+
+    <xsl:variable name="customFacets">
+      <xsl:for-each select="str:tokenize($customProperty, ',')">
+        <facet name="{normalize-space(.)}"/>
+      </xsl:for-each>
+    </xsl:variable>
+
+    <xsl:for-each select="exslt:node-set($customFacets)/facet">
+      <xsl:variable name="visible">
+        <xsl:call-template name="isFacetVisible">
+          <xsl:with-param name="facet_name" select="@name"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:if test="$visible='true'">
+        <xsl:apply-templates select="." mode="custom-facet">
+          <xsl:with-param name="response" select="$response"/>
+        </xsl:apply-templates>
+      </xsl:if>
+    </xsl:for-each>
   </xsl:template>
+
+  <!-- Fallback: angemeldete, aber (noch) nicht implementierte Facette -> nichts ausgeben -->
+  <xsl:template match="facet" mode="custom-facet" priority="-1"/>
 
   <xsl:template match="/response/lst[@name='facet_counts']/lst[@name='facet_fields']">
     <xsl:param name="facet_name"/>
