@@ -10,6 +10,7 @@
 
   <xsl:param name="CurrentLang"/>
   <xsl:param name="RequestURL"/>
+  <xsl:param name="CurrentUser"/>
 
   <xsl:variable name="facetProperties" select="document(concat('property:','MIR.Response.Facet.*'))"/>
 
@@ -27,7 +28,13 @@
       </xsl:variable>
       <xsl:variable name="hasRole" select="string-length($rolesProperty)=0 or count(str:tokenize($rolesProperty,',')[mcrxsl:isCurrentUserInRole(.)])!=0"/>
 
-      <xsl:if test="$isEnabled and $hasRole and self::node()[@name=$facet_name]/int">
+      <!-- optionale Einschraenkung auf bestimmte Benutzernamen (kommasepariert), z.B. 'guest' -->
+      <xsl:variable name="userProperty">
+        <xsl:value-of select="$facetProperties/properties/entry[@key=concat('MIR.Response.Facet.', $facet_name, '.User')]"/>
+      </xsl:variable>
+      <xsl:variable name="hasUser" select="string-length($userProperty)=0 or count(str:tokenize($userProperty,',')[.=$CurrentUser])!=0"/>
+
+      <xsl:if test="$isEnabled and $hasRole and $hasUser and self::node()[@name=$facet_name]/int">
 
         <xsl:variable name="classIdProperty">
           <xsl:value-of select="$facetProperties/properties/entry[@key=concat('MIR.Response.Facet.', $facet_name, '.ClassId')]"/>
