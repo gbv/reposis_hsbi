@@ -10,5 +10,17 @@
         "name":"mods.refereed.public",
         "type":"string",
         "multiValued":false}
+  },
+  {
+    "add-field-type": {
+      "name": "timebarfield",
+      "class": "solr.DateRangeField"
+    }
+  },
+  {
+    "add-field": {
+        "name":"mods.dateIssued.timebar",
+        "type":"timebarfield",
+        "multiValued":false}
   }
 ]
