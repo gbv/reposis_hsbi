@@ -11,31 +11,48 @@
   <xsl:import href="xslImport:solr-document-3:mir-refereed-solr-3.xsl"/>
 
   <!--
-    Mehrstufig wie in OpenAgrar, aber idiomatisch in XSLT 3.0:
-    baue die Kette Objekt -> host/series -> ... auf und nimm den
-    naechstliegenden expliziten yes|no. Kein exslt:node-set noetig.
+    Datenmodell wie in reposis_openagrar:
+    mods:extension[@type='characteristics']/chars/@refereed
+
+    Funktional identisch zu mir-characteristics-refereed.xsl (XSLT 1.0),
+    inklusive Ebenen-Information: mir:refereed-info() liefert
+      <refereed value="yes|no|n/a" level="1|2|3|4|0"/>
+    mir:refereed() ist der bequeme String-Zugriff fuer die Solr-Felder.
   -->
-  <xsl:function name="mir:refereed" as="xs:string">
+
+  <!-- erster expliziter yes|no innerhalb EINER Ebene -->
+  <xsl:function name="mir:at-level" as="xs:string?">
+    <xsl:param name="nodes" as="element()*"/>
+    <xsl:sequence select="($nodes/mods:extension[@type='characteristics']
+                                 /chars/@refereed[. = ('yes','no')]/string())[1]"/>
+  </xsl:function>
+
+  <xsl:function name="mir:refereed-info" as="element(refereed)">
     <xsl:param name="mods" as="element(mods:mods)"/>
 
     <!-- Ebenen von innen (Objekt) nach aussen (verschachtelte host/series) -->
-    <xsl:variable name="levels" as="element()*">
-      <xsl:sequence select="$mods"/>
-      <xsl:sequence select="$mods/mods:relatedItem[@type=('host','series')]"/>
-      <xsl:sequence select="$mods/mods:relatedItem[@type=('host','series')]
-                                 /mods:relatedItem[@type=('host','series')]"/>
-      <xsl:sequence select="$mods/mods:relatedItem[@type=('host','series')]
-                                 /mods:relatedItem[@type=('host','series')]
-                                 /mods:relatedItem[@type=('host','series')]"/>
-    </xsl:variable>
+    <xsl:variable name="d1" as="element()*" select="$mods"/>
+    <xsl:variable name="d2" as="element()*" select="$d1/mods:relatedItem[@type = ('host','series')]"/>
+    <xsl:variable name="d3" as="element()*" select="$d2/mods:relatedItem[@type = ('host','series')]"/>
+    <xsl:variable name="d4" as="element()*" select="$d3/mods:relatedItem[@type = ('host','series')]"/>
 
-    <!-- erster expliziter yes|no in Ebenen-Reihenfolge; sonst n/a -->
-    <xsl:variable name="hit" as="xs:string?"
-      select="(for $l in $levels
-                 return $l/mods:extension[@displayLabel='characteristics']/chars/@refereed
-                          [. = ('yes','no')]/string())[1]"/>
+    <!-- genau vier Eintraege, damit die Position der Ebene entspricht -->
+    <xsl:variable name="values" as="xs:string+" select="
+      (mir:at-level($d1), '')[1],
+      (mir:at-level($d2), '')[1],
+      (mir:at-level($d3), '')[1],
+      (mir:at-level($d4), '')[1]"/>
 
-    <xsl:sequence select="($hit, 'n/a')[1]"/>
+    <!-- naechstliegende Ebene mit explizitem Wert; 0 = keine -->
+    <xsl:variable name="level" as="xs:integer"
+      select="((for $i in 1 to 4 return $i[$values[$i] ne ''])[1], 0)[1]"/>
+
+    <refereed value="{if ($level eq 0) then 'n/a' else $values[$level]}" level="{$level}"/>
+  </xsl:function>
+
+  <xsl:function name="mir:refereed" as="xs:string">
+    <xsl:param name="mods" as="element(mods:mods)"/>
+    <xsl:sequence select="mir:refereed-info($mods)/@value/string()"/>
   </xsl:function>
 
   <xsl:template match="mycoreobject[contains(@ID,'_mods_')]">

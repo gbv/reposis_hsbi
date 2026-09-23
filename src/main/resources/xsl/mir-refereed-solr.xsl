@@ -3,7 +3,8 @@
   version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:mods="http://www.loc.gov/mods/v3"
-  exclude-result-prefixes="mods"
+  xmlns:exslt="http://exslt.org/common"
+  exclude-result-prefixes="mods exslt"
 >
   <!-- haengt sich in die (aktive) XSLT-1.0-Kette solr-document ein -->
   <xsl:import href="xslImport:solr-document:mir-refereed-solr.xsl"/>
@@ -22,7 +23,7 @@
         <xsl:with-param name="mods" select="."/>
       </xsl:call-template>
     </xsl:variable>
-    <xsl:variable name="value" select="normalize-space($refereed)"/>
+    <xsl:variable name="value" select="exslt:node-set($refereed)/refereed/@value"/>
 
     <!-- interne Facette: immer (yes|no|n/a) -->
     <field name="mods.refereed"><xsl:value-of select="$value"/></field>
