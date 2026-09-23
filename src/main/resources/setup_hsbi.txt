@@ -1,2 +1,3 @@
 update classification from url https://www.mycore.de/classifications/ddc.xml
 update classification from uri resource:classifications/rfc5646.xml
+reload solr configuration main in core main
