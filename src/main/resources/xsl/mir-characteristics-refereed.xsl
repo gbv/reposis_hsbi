@@ -7,38 +7,52 @@
 >
 
   <!--
-    Zentrales Template: entscheidet, welcher Zustand (yes|no|n/a) indexiert wird.
+    Zentrales Template: entscheidet, welcher Zustand (yes|no|n/a) gilt.
     Mehrstufig wie in OpenAgrar: zuerst das Objekt selbst, dann rekursiv die
     host/series-relatedItems (bis 4 Ebenen). Der naechstliegende explizite
     Wert (yes|no) gewinnt; wird keiner gefunden -> n/a.
 
-    Unterschied zu OpenAgrar 2021: MIR 2025 speichert die Eigenschaft unter
-    mods:extension[@displayLabel='characteristics']/chars/@refereed
-    (2021 war es nur mods:extension/chars/@refereed).
+    Rueckgabe wie in OpenAgrar ein Fragment
+      <refereed value="yes|no|n/a" level="1|2|3|4|0"/>
+    damit Aufrufer (Metadatenbox) anzeigen koennen, WOHER der Wert stammt.
+    Auslesen per exslt:node-set($var)/refereed/@value bzw. /@level.
+
+    Datenmodell wie in reposis_openagrar:
+    mods:extension[@type='characteristics']/chars/@refereed
   -->
   <xsl:template name="getCharacteristicsRefereed">
     <xsl:param name="mods"/>
+    <xsl:variable name="lvl1" select="$mods"/>
+    <xsl:variable name="lvl2" select="$lvl1/mods:relatedItem[@type='host' or @type='series']"/>
+    <xsl:variable name="lvl3" select="$lvl2/mods:relatedItem[@type='host' or @type='series']"/>
+    <xsl:variable name="lvl4" select="$lvl3/mods:relatedItem[@type='host' or @type='series']"/>
     <xsl:choose>
-      <xsl:when test="$mods/mods:extension[@type='characteristics']/chars/@refereed='yes'">yes</xsl:when>
-      <xsl:when test="$mods/mods:extension[@type='characteristics']/chars/@refereed='no'">no</xsl:when>
+      <xsl:when test="$lvl1/mods:extension[@type='characteristics']/chars/@refereed='yes'">
+        <refereed value="yes" level="1"/>
+      </xsl:when>
+      <xsl:when test="$lvl1/mods:extension[@type='characteristics']/chars/@refereed='no'">
+        <refereed value="no" level="1"/>
+      </xsl:when>
+      <xsl:when test="$lvl2/mods:extension[@type='characteristics']/chars/@refereed='yes'">
+        <refereed value="yes" level="2"/>
+      </xsl:when>
+      <xsl:when test="$lvl2/mods:extension[@type='characteristics']/chars/@refereed='no'">
+        <refereed value="no" level="2"/>
+      </xsl:when>
+      <xsl:when test="$lvl3/mods:extension[@type='characteristics']/chars/@refereed='yes'">
+        <refereed value="yes" level="3"/>
+      </xsl:when>
+      <xsl:when test="$lvl3/mods:extension[@type='characteristics']/chars/@refereed='no'">
+        <refereed value="no" level="3"/>
+      </xsl:when>
+      <xsl:when test="$lvl4/mods:extension[@type='characteristics']/chars/@refereed='yes'">
+        <refereed value="yes" level="4"/>
+      </xsl:when>
+      <xsl:when test="$lvl4/mods:extension[@type='characteristics']/chars/@refereed='no'">
+        <refereed value="no" level="4"/>
+      </xsl:when>
       <xsl:otherwise>
-        <xsl:choose>
-          <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='yes'">yes</xsl:when>
-          <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='no'">no</xsl:when>
-          <xsl:otherwise>
-            <xsl:choose>
-              <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='yes'">yes</xsl:when>
-              <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='no'">no</xsl:when>
-              <xsl:otherwise>
-                <xsl:choose>
-                  <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='yes'">yes</xsl:when>
-                  <xsl:when test="$mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:extension[@type='characteristics']/chars/@refereed='no'">no</xsl:when>
-                  <xsl:otherwise>n/a</xsl:otherwise>
-                </xsl:choose>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:otherwise>
-        </xsl:choose>
+        <refereed value="n/a" level="0"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
