@@ -15,13 +15,13 @@
 
   <!-- copy from OpenAgrar -->
   <xed:template id="oa.extension.characteristics">
-    <div class="form-group row {$xed-validation-marker}">
-      <label class="col-md-3 col-form-label text-right">
+    <div class="mir-form-group row {$xed-validation-marker}">
+      <label class="col-md-3 col-form-label text-end form-label">
         <xed:output i18n="component.mods.metaData.dictionary.refereed" />
       </label>
       <div class="col-md-6">
         <xed:bind xpath="mods:extension[@type='characteristics']/chars/@refereed">
-          <select class="form-control" style="font-weight:bold;">
+          <select class="form-control form-select" style="font-weight:bold;">
             <option value="">
               <xed:output i18n="mir.select.optional" />
             </option>
@@ -40,14 +40,14 @@
   
   <xed:template id="digibib.ddc.repeat">
     <xed:repeat xpath="mods:classification[@authority='ddc'][@displayLabel='ddc']" min="1" max="10" method="build">
-      <div class="form-group row required {$xed-validation-marker}">
-        <label class="col-md-3 col-form-label text-right">
+      <div class="mir-form-group row required {$xed-validation-marker}">
+        <label class="col-md-3 col-form-label text-end form-label">
           <xed:output i18n="editor.search.digibib.ddc" />
           :
         </label>
         <div class="col-md-6">
           <div class="controls">
-            <select class="form-control form-control-inline">
+            <select class="form-control form-control-inline form-select">
               <option value="">
                 <xed:output i18n="mir.select" />
               </option>
