@@ -10,6 +10,22 @@
 // XX-Large devices (larger desktops)
 // No media query since the xxl breakpoint has no upper bound on its width
 
+// badges in metadata view and search result list
+.mir-badge-container {
+  .badge {
+    color: black;
+  }
+  // publication type (genre) in corporate blue
+  [class*="mir-badge-genre-"] {
+    background-color: $hsbi-blue;
+  }
+  // MIR uses green ($success) here, use the default badge color instead
+  .mir-badge-state-published,
+  .mir-badge-oa-true {
+    background-color: $primary;
+  }
+}
+
 
 
 // X-Large devices (large desktops, less than 1400px)
