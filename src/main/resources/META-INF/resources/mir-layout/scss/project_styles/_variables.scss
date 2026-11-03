@@ -19,6 +19,7 @@ $hsbi-brown:      #d7d2c3;
 $hsbi-black:      #5c4d3d;
 $hsbi-gold:       #856b47;
 $hsbi-gold-hover: #5c4d3d;
+$hsbi-blue:       #6eafc8; // corporate blue (RGB 110 175 200)
 
 // --------------------------------------------------
 //  overwrite bootstrap
@@ -48,3 +49,16 @@ $dropdown-link-hover-color:         $body-color;
 $dropdown-link-hover-bg:            $primary;
 $dropdown-link-active-color:        $hsbi-gold;
 $dropdown-link-active-bg:           white;
+
+// pagination below search results: no background, black text,
+// current page in corporate blue (flatly default is green)
+$pagination-color:                  black;
+$pagination-bg:                     transparent;
+$pagination-hover-color:            $hsbi-gold;
+$pagination-hover-bg:               transparent;
+$pagination-focus-color:            $hsbi-gold;
+$pagination-focus-bg:               transparent;
+$pagination-active-color:           $hsbi-blue;
+$pagination-active-bg:              transparent;
+$pagination-disabled-color:         #999;
+$pagination-disabled-bg:            transparent;

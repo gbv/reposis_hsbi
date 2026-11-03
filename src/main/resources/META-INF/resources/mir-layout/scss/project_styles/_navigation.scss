@@ -8,6 +8,17 @@
 // XX-Large devices (larger desktops)
 // No media query since the xxl breakpoint has no upper bound on its width
 
+// pagination below search results
+// MIR sets `.pagination a { color: #fff }`, reset it to the bootstrap variable
+.pagination {
+  a {
+    color: var(--bs-pagination-color);
+  }
+  .page-item.active .page-link {
+    font-weight: bold;
+  }
+}
+
 // X-Large devices (large desktops, less than 1400px)
 @include media-breakpoint-down(xxl) {
   // add/overwrite styles for responsive level xl and lower
