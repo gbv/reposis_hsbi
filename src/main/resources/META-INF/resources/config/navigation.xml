@@ -9,11 +9,11 @@
   <menu id="brand" dir="/content/brand">
     <label xml:lang="de">MIR-Menü</label>
     <label xml:lang="en">MIR menu</label>
-    <item href="/content/brand/impressum.xml" type="intern">
+    <item href="https://www.hsbi.de/open-access/publikationsserver/impressum" type="extern" target="_blank">
       <label xml:lang="de">Impressum</label>
       <label xml:lang="en">Impressum</label>
     </item>
-    <item href="/content/brand/contact.xml" type="intern">
+    <item href="https://www.hsbi.de/open-access/open-access-serviceteam" type="extern" target="_blank">
       <label xml:lang="de">Kontakt</label>
       <label xml:lang="en">Contact</label>
     </item>
