@@ -13,6 +13,10 @@
       <label xml:lang="de">Impressum</label>
       <label xml:lang="en">Impressum</label>
     </item>
+    <item href="https://www.hsbi.de/bib/datenschutzhinweise" type="extern" target="_blank">
+      <label xml:lang="de">Datenschutz</label>
+      <label xml:lang="en">Privacy Policy</label>
+    </item>
     <item href="https://www.hsbi.de/open-access/open-access-serviceteam" type="extern" target="_blank">
       <label xml:lang="de">Kontakt</label>
       <label xml:lang="en">Contact</label>
