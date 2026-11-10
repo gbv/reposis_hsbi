@@ -73,8 +73,8 @@
     </item>
   </menu>
   <menu id="publish" dir="/content/publish">
-    <label xml:lang="de">Dokumente einreichen</label>
-    <label xml:lang="en">Submit Document</label>
+    <label xml:lang="de">Informationen</label>
+    <label xml:lang="en">Information</label>
     <item href="/content/publish/index.xml" type="intern" replaceMenu="false" constrainPopUp="false">
       <label xml:lang="de">Publizieren</label>
       <label xml:lang="en">Publish</label>
@@ -92,7 +92,7 @@
       <label xml:lang="en">Guideline</label>
     </item>
     <item href="/content/publish/contract.xml" type="intern">
-      <label xml:lang="de">Autorenvereinarung</label>
+      <label xml:lang="de">Autorenvereinbarung</label>
       <label xml:lang="en">Contract for authors</label>
     </item>
   </menu>
