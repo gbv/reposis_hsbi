@@ -17,6 +17,10 @@
       <label xml:lang="de">Datenschutz</label>
       <label xml:lang="en">Privacy Policy</label>
     </item>
+    <item href="/content/below/accessibility.xml" type="intern">
+      <label xml:lang="de">Barrierefreiheit</label>
+      <label xml:lang="en">Accessibility</label>
+    </item>
     <item href="https://www.hsbi.de/open-access/open-access-serviceteam" type="extern" target="_blank">
       <label xml:lang="de">Kontakt</label>
       <label xml:lang="en">Contact</label>

@@ -5,21 +5,83 @@
         <div class="row">
             <div class="col-md-12" lang="de">
                 <h1>Erklärung zur Barrierefreiheit</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Ullamcorper morbi tincidunt ornare massa eget egestas purus
-                    viverra. Vitae purus faucibus ornare suspendisse sed nisi lacus. Erat velit scelerisque in
-                    dictum non consectetur a erat. Faucibus et molestie ac feugiat sed lectus. Turpis in eu mi
-                    bibendum neque. At erat pellentesque adipiscing commodo elit at imperdiet dui. Ut porttitor leo
-                    a diam. Gravida cum sociis natoque penatibus et magnis dis parturient montes. Mollis nunc sed id
-                    semper risus in hendrerit gravida rutrum. Eget nunc scelerisque viverra mauris. Et ligula
-                    ullamcorper malesuada proin libero nunc. Felis donec et odio pellentesque. Quis ipsum
-                    suspendisse ultrices gravida dictum. Amet dictum sit amet justo donec enim diam vulputate ut.
-                    Consequat ac felis donec et odio pellentesque diam.
+                <p>
+                    Diese Erklärung zur Barrierefreiheit gilt für die Webseiten und Inhalte des Publikationsservers,
+                    die unter der Domain
+                    <a href="https://publikationsserver.hsbi.de/content/index.xml">https://publikationsserver.hsbi.de/content/index.xml</a>
+                    erreichbar sind.
                 </p>
+                <p>
+                    Die Hochschule Bielefeld setzt sich dafür ein, die digitale Barrierefreiheit für Menschen mit
+                    Behinderungen zu gewährleisten.
+                </p>
+                <p>
+                    Somit ist die Hochschule Bielefeld bemüht, die Webseiten in Einklang mit § 10 Absatz 1 des
+                    Landesbehindertengleichstellungsgesetzes (L-BGG) barrierefrei zugänglich zu machen.
+                </p>
+
+                <h2>Nicht barrierefreie Inhalte</h2>
+                <p>
+                    Die auf dem Publikationsserver veröffentlichten Dokumente sind teilweise nicht barrierefrei und
+                    können nicht automatisiert in ein barrierefreies Format umgewandelt werden, da die HSBI nicht das
+                    Recht auf die Änderung der Dateien besitzt und die Ausgangsformate nicht zur Verfügung stehen.
+                </p>
+                <p>
+                    Der Publikationsserver richtet sich an Wissenschaftlerinnen und Wissenschaftler aus
+                    unterschiedlichen Fachrichtungen. Aufgrund der komplexen Inhalte kann eine einfache
+                    Sprachgestaltung nicht umgesetzt werden und es werden gängige Fachbegriffe und Abkürzungen
+                    genutzt.
+                </p>
+
+                <h2>Erstellung dieser Erklärung zur Barrierefreiheit</h2>
+                <p>
+                    Diese Erklärung wurde am 12.11.2026 erstellt. Die Einschätzung basiert auf Selbstbewertung.
+                </p>
+
+                <h2>Feedback und Kontaktangaben</h2>
+                <p>
+                    Über folgenden Kontakt können Sie Mängel in Bezug auf die Einhaltung der
+                    Barrierefreiheitsanforderungen mitteilen oder Fragen zur Umsetzung stellen:
+                </p>
+                <p>
+                    <a href="mailto:open@hsbi.de">open@hsbi.de</a>
+                </p>
+                <p>
+                    Alternativ können Sie uns per Post kontaktieren:
+                </p>
+                <address>
+                    Hochschule Bielefeld<br/>
+                    Hochschulbibliothek<br/>
+                    Interaktion 1<br/>
+                    Postfach: 10 11 13<br/>
+                    D-33511 Bielefeld
+                </address>
+
+                <h2>Durchsetzungs- und Schlichtungsverfahren</h2>
+                <p>
+                    Wenn auch nach Ihrem Feedback an den oben genannten Kontakt keine zufriedenstellende Lösung
+                    gefunden wurde, können Sie sich an die Schlichtungsstelle für barrierefreie Informationstechnik
+                    wenden. Die Schlichtungsstelle hat die Aufgabe, bei Konflikten zum Thema Barrierefreiheit
+                    zwischen Menschen mit Behinderungen und öffentlichen Stellen eine außergerichtliche
+                    Streitbeilegung zu unterstützen. Das Schlichtungsverfahren ist kostenlos. Es muss kein
+                    Rechtsbeistand eingeschaltet werden.
+                </p>
+
+                <h2>Kontaktmöglichkeiten</h2>
+                <p>
+                    In Nordrhein-Westfalen ist die Ombudsstelle für barrierefreie Informationstechnik die zentrale
+                    Anlaufstelle, wenn Sie auf Barrieren in digitalen Angeboten öffentlicher Stellen stoßen. Sie
+                    unterstützt Sie dabei, solche Barrieren zu melden und Lösungen zu finden.
+                </p>
+                <ul class="list-unstyled">
+                    <li>Telefon: <a href="tel:+492118553451">0211 / 855-3451</a></li>
+                    <li>E-Mail: <a href="mailto:ombudsstelle-barrierefreie-it@mags.nrw.de">ombudsstelle-barrierefreie-it@mags.nrw.de</a></li>
+                    <li>Internetauftritt: <a href="http://mags.nrw/ombudsstelle-barrierefreie-informationstechnik">http://mags.nrw/ombudsstelle-barrierefreie-informationstechnik</a></li>
+                </ul>
             </div>
         </div>
     </section>
     <meta>
-        <log lastEditor="administrator" date="2020-09-22" time="12:30"/>
+        <log lastEditor="administrator" date="2026-11-13" time="12:00"/>
     </meta>
 </MyCoReWebPage>
